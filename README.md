@@ -23,8 +23,8 @@ The dashboard helps operations and supply teams identify which stores or SKUs ar
 
 - **ETL Pipeline:**  
   - Data extracted from SQL Server (transactional source)  
-  - Cleaned and transformed using **AWS Glue Python scripts**  
-  - Loaded into **Amazon Redshift** for analytical querying  
+  - Cleaned and transformed using **AWS Glue PySpark Python scripts**  
+  - Loaded into **Amazon Redshift** for analytical querying
 
 - **Model Design:**  
   - Star-schema model with `fact_sales`, `dim_store`, and `dim_product`  
