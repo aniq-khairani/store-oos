@@ -25,6 +25,7 @@ The dashboard helps operations and supply teams identify which stores or SKUs ar
   - Data extracted from SQL Server (transactional source)  
   - Cleaned and transformed using **AWS Glue PySpark Python scripts**  
   - Loaded into **Amazon Redshift** for analytical querying
+  - Source data was processed and transformed through **AWS Glue ETL jobs** developed using **PySpark (Python)** before loading into **Amazon Redshift**
 
 - **Model Design:**  
   - Star-schema model with `fact_sales`, `dim_store`, and `dim_product`  
