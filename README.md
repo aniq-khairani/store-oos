@@ -9,26 +9,50 @@
 🔗 [View Power BI Dashboard](https://app.powerbi.com/view?r=example)
 
 ### 🧠 Overview
-This report monitors **cost and selling price alignment** across multiple merchants (e.g., Food Panda, Shopee Food) and product categories.  
-It enables quick comparison between procurement and selling margins to ensure accurate pricing strategies across platforms.
+This report tracks **store-level Out-of-Stock (OOS)** performance across multiple sales channels.  
+It provides real-time insights into inventory availability, restocking efficiency, and product supply consistency across outlets.
+
+The dashboard helps operations and supply teams identify which stores or SKUs are experiencing frequent OOS issues and plan replenishments more efficiently.
+
+---
 
 ### ⚙️ Technical Summary
-- **Data Source:** Amazon Redshift (multiple joined tables via custom SQL script)  
-- **SQL Logic:** Combined cost, selling price, and product master data using inner joins and date filters.  
-- **Transformations:** Initial data preparation done in SQL; further aggregation handled in Power BI DAX.  
-- **Model:** Star-schema inspired (Fact table joined with Dimension tables).  
+- **Data Sources:**  
+  - 🟥 **Amazon Redshift:** Processed data warehouse tables  
+  - 🟦 **SQL Server / DWH:** Source operational data  
 
-### 🧮 Key Metrics
-- Cost Price (RM)  
-- Selling Price (RM)  
-- Price Variance by Category  
-- Merchant-wise Pricing Comparison  
-- Category and Item Filtering  
+- **ETL Pipeline:**  
+  - Data extracted from SQL Server (transactional source)  
+  - Cleaned and transformed using **AWS Glue Python scripts**  
+  - Loaded into **Amazon Redshift** for analytical querying  
+
+- **Model Design:**  
+  - Star-schema model with `fact_sales`, `dim_store`, and `dim_product`  
+  - Calculated measures and relationships handled in **Power BI**  
+
+- **Transformations:**  
+  - Python scripts applied data cleaning, standardization, and time-based aggregations  
+  - Power BI DAX used for KPI logic (OOS rate, availability %, etc.)
+
+---
+
+### 📊 Key Metrics
+- Store-level OOS Rate (%)  
+- Daily Stock Availability Trend  
+- Top 10 Frequently OOS Products  
+- Supplier Fill Rate  
+- Category & Region-based OOS Comparison  
+
+---
 
 ### 🧩 Report Features
-- Dynamic filtering by Merchant Type, Pricing Group, and Item  
-- Table view optimized for readability on control-room displays  
-- Automated daily data refresh at 12:00 AM  
-- Last Updated Timestamp shown for data transparency  
+- Dynamic date and store-level filtering  
+- Color-coded visual indicators for OOS severity  
+- Cross-filtering between SKU, category, and store visuals  
+- Automatic daily refresh via Redshift connection  
+- Timestamp display for transparency  
+
+> 🕒 *Data pipeline auto-refreshes daily through AWS Glue.*  
+> ⚡ *Combines multi-source data (SQL Server → Glue → Redshift → Power BI).*
 
 > 💡 *Used SQL joins in Redshift to merge merchant, product, and pricing data before loading into Power BI.*
