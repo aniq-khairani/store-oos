@@ -1,4 +1,4 @@
-## 💰 Store OOS Report
+## Store OOS Report
 
 ### 📊 Dashboard Preview
 ![Dashboard Page 1](images/store-oos-p1.png)
